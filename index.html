@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#7b1e1e" />
+  <title>CTU Smart Campus Service Requests</title>
+  <link rel="manifest" href="manifest.json" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" type="image/png" href="icons/icon-192.png" />
+<link rel="apple-touch-icon" href="icons/icon-192.png" />   
+</head>
+<body>  
+  <div id="offline-banner" class="offline" hidden>
+    You are offline. Saved requests are still available, but online services are unavailable.
+  </div>
+
+  <header>
+    <h1>CTU Smart Campus Service Request System</h1>
+  </header>
+
+  <main>
+    <div id="message" class="message" role="alert" hidden></div>
+
+    <section class="card">
+      <h2>Submit a Request</h2>
+      <form id="request-form" novalidate>
+        <label for="name">Student Name</label>
+        <input type="text" id="name" placeholder="Enter Full Name" />
+
+        <label for="type">Type of Concern</label>
+        <select id="type"></select>
+
+        <label for="description">Description</label>
+        <textarea id="description" rows="4" placeholder="Describe the concern in detail"></textarea>
+
+        <label for="date">Date of Request</label>
+        <input type="date" id="date" />
+
+        <button type="submit">Submit Request</button>
+      </form>
+    </section>
+
+    <section class="card">
+      <h2>Requests</h2>
+      <div class="toolbar">
+        <input type="search" id="search" placeholder="Search by Request ID" />
+        <select id="filter"></select>
+      </div>
+      <button id="sync-btn" type="button">Sync to Server</button>
+      <div id="request-list"></div>
+    </section>
+
+    <section class="card dev-tools">
+      <h2>Developer Tools (for demo)</h2>
+      <label class="inline">
+        <input type="checkbox" id="fail-toggle" /> Simulate server/data-service failure
+      </label>
+    </section>
+  </main>
+
+  <script type="module" src="js/ui.js"></script>
+  <script>
+  if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.register("sw.js");
+  }
+</script>
+</body>
+</html>
